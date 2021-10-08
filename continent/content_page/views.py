@@ -15,7 +15,7 @@ class PageView(ListModelMixin, CreateModelMixin, GenericAPIView):
         return self.list(request, *args, **kwargs)
 
 
-class VideoView(APIView):
+class ContentView(APIView):
     def get(self, request, pk):
         video_articles = Video.objects.filter(page_id=pk)
         serializer_video = VideoSerializer(video_articles, many=True)
@@ -23,6 +23,8 @@ class VideoView(APIView):
         serializer_audio = AudioSerializer(audio_articles, many=True)
         text_articles = Text.objects.filter(page_id=pk)
         serializer_text = TextSerializer(text_articles, many=True)
+
+
 
         video_counter = Video.objects.get(page_id=pk)
         video_counter.views = F('views') + 1
@@ -39,5 +41,5 @@ class VideoView(APIView):
         text_counter.save()
         text_counter.refresh_from_db()
 
-        return Response({"Video": serializer_video.data, "Audio": serializer_audio.data, "Text": serializer_text.data, })
+        return Response({f'Page {pk}':{"Video": serializer_video.data, "Audio": serializer_audio.data, "Text": serializer_text.data}})
 

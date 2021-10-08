@@ -16,16 +16,22 @@ class PageSerializer(serializers.ModelSerializer):
 class VideoSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=120)
     views = serializers.IntegerField()
-    page_id = serializers.IntegerField()
+    video_file = serializers.FileField()
+    url_video_file = serializers.URLField()
+    url_sub_file = serializers.URLField()
 
 
 class AudioSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=120)
     views = serializers.IntegerField()
-    page_id = serializers.IntegerField()
+    audio_file = serializers.FileField()
+    audio_bitrate = serializers.FloatField()
 
 
 class TextSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=120)
     views = serializers.IntegerField()
-    page_id = serializers.IntegerField()
+    text = serializers.CharField()
+
+
+
