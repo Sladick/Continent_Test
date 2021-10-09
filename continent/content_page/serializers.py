@@ -34,4 +34,9 @@ class TextSerializer(serializers.Serializer):
     text = serializers.CharField()
 
 
+class Page1Serializer(serializers.Serializer):
+    title = serializers.CharField()
+
+
+
 
